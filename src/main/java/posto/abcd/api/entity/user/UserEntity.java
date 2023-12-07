@@ -1,10 +1,11 @@
-package posto.abcd.api.entity;
+package posto.abcd.api.entity.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import posto.abcd.api.dtos.user.UserDataRequest;
 
 
 @Entity
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class User {
+public class UserEntity {
 
     @Id // informa para JPA que vai ser o ID da entidade
         @GeneratedValue(strategy = GenerationType.IDENTITY) // estratégia de geracao de id
@@ -21,4 +22,10 @@ public class User {
     private String name;
     private String login;
     private String password_hash;
+
+    public UserEntity(UserDataRequest userData) {
+        this.name = userData.name();
+        this.login = userData.login();
+        this.password_hash = userData.password_hash();
+    }
 }
