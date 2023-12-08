@@ -7,9 +7,6 @@ import posto.abcd.api.entity.fuelTank.FuelTankEntity;
 import java.time.LocalDateTime;
 
 public record FillTankDataRequest(
-        @NotNull(message = "A data não pode ser nula")
-        LocalDateTime date,
-
         @Positive(message = "A quantidade de litros deve ser um número positivo")
         Long liters,
 

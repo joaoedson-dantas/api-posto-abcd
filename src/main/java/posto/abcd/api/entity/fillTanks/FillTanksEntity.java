@@ -3,10 +3,7 @@ package posto.abcd.api.entity.fillTanks;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import posto.abcd.api.dtos.fillTank.FillTankDataRequest;
 import posto.abcd.api.entity.fuelTank.FuelTankEntity;
 
@@ -25,14 +22,24 @@ public class FillTanksEntity {
     private Long id;
 
     @Column(name = "date")
+    @Setter
     private LocalDateTime date;
 
 
     @Min(0)
+    @Setter
     private Long liters;
 
-    @ManyToOne
+    @Setter
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fuel_tank_id")
     private FuelTankEntity fuelTankEntity;
 
+    public FillTanksEntity(FillTankDataRequest fillTankDataRequest, LocalDateTime now, FuelTankEntity fuelTank) {
+        if (fillTankDataRequest.liters() > 0 ) {
+            this.setLiters(fillTankDataRequest.liters());
+            this.setDate(now);
+            this.setFuelTankEntity(fuelTank);
+        }
+    }
 }

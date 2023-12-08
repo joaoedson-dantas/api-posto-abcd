@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import posto.abcd.api.dtos.fillTank.FillTankDataRequest;
 import posto.abcd.api.entity.fillTanks.FillTanksEntity;
-import posto.abcd.api.entity.fuelTank.FuelTankEntity;
 import posto.abcd.api.repository.fillTank.FillTankRepository;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
 
@@ -37,8 +36,8 @@ public class FillTankService {
 
         tank.toFuel(fillTankDataRequest.liters());
 
-        var entity = new FillTanksEntity(null, fillTankDataRequest.date(), fillTankDataRequest.liters(), tank);
-        return fillTankRepository.save(entity);
+        var fillTanksEntity = new FillTanksEntity(fillTankDataRequest, LocalDateTime.now(), tank);
+        return fillTankRepository.save(fillTanksEntity);
 
     }
 }
