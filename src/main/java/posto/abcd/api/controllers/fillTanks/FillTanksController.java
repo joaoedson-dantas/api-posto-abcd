@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import posto.abcd.api.dtos.fillTank.FillTankDataRequest;
 import posto.abcd.api.dtos.fillTank.FillTankDataResponse;
-import posto.abcd.api.entity.fillTanks.FillTanksEntity;
 import posto.abcd.api.service.fillTank.FillTankService;
 
-import java.util.List;
+
 
 @RestController
 @RequestMapping("fill-tanks")

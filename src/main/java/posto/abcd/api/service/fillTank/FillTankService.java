@@ -12,7 +12,6 @@ import posto.abcd.api.repository.fillTank.FillTankRepository;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class FillTankService {

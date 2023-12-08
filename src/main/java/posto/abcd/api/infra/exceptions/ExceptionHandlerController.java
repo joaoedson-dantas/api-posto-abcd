@@ -24,12 +24,14 @@ public class ExceptionHandlerController {
     }
 
 
-
+    // dto - para devolver o erro
     private record dataValidationErrors(String field, String message) {
         public dataValidationErrors(FieldError erro) {
             this(erro.getField(), erro.getDefaultMessage());
         }
-    } // dto - para devolver o erro
+    }
+
+
 }
 
 

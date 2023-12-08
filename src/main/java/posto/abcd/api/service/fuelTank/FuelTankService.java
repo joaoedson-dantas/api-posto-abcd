@@ -1,6 +1,6 @@
 package posto.abcd.api.service.fuelTank;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import posto.abcd.api.dtos.fuelTank.FuelTankDataRequest;
@@ -21,7 +21,6 @@ public class FuelTankService {
     }
 
 
-
     @Transactional
     public FuelTankEntity create(FuelTankDataRequest fuelTankDataRequest) {
         var fuelTankEntity = new FuelTankEntity(fuelTankDataRequest, LocalDateTime.now());
@@ -30,15 +29,23 @@ public class FuelTankService {
     }
 
     public List<FuelTankEntity> list() {
-        return fuelTankRepository.findAll();
+        var fuelTanks =  fuelTankRepository.findAll();
+
+        if (fuelTanks == null) {
+            throw new EntityNotFoundException();
+        }
+
+        return fuelTanks;
     }
 
+    public FuelTankEntity findByFuelType(String name) {
+        var fuelTanks =  fuelTankRepository.findByName(name.toUpperCase()).orElseThrow(() -> new EntityNotFoundException("Tipo de tank não encontrado: " + name));
 
+        if(fuelTanks == null) {
+            throw new EntityNotFoundException();
+        }
+
+        return fuelTanks;
+    }
 
 }
-
-//       try {
-//            fuelTankRepository.save(fuelTankEntity);
-//        } catch (Exception e) {
-//            throw new RuntimeException("Erro ao salvar o tanque de combustível", e);
-//        }

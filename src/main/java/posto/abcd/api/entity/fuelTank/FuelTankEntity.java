@@ -39,11 +39,9 @@ public class FuelTankEntity {
 
 
     public void toFuel(Long numberOfLitersToFill) {
-
         if (numberOfLitersToFill != null && numberOfLitersToFill > 0) {
             this.setLiters(this.getLiters() + numberOfLitersToFill);
         }
-
     }
 
 }
