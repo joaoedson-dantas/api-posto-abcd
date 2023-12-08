@@ -8,6 +8,7 @@ import posto.abcd.api.entity.fuelTank.FuelTankEntity;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class FuelTankService {
@@ -27,6 +28,11 @@ public class FuelTankService {
         fuelTankRepository.save(fuelTankEntity);
         return fuelTankEntity;
     }
+
+    public List<FuelTankEntity> list() {
+        return fuelTankRepository.findAll();
+    }
+
 
 
 }
