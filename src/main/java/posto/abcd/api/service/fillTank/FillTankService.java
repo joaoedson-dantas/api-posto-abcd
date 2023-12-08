@@ -1,14 +1,19 @@
 package posto.abcd.api.service.fillTank;
 
 import jakarta.validation.ValidationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import posto.abcd.api.dtos.fillTank.FillTankDataRequest;
+import posto.abcd.api.dtos.fillTank.FillTankDataResponse;
 import posto.abcd.api.entity.fillTanks.FillTanksEntity;
 import posto.abcd.api.repository.fillTank.FillTankRepository;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 public class FillTankService {
 
@@ -39,5 +44,9 @@ public class FillTankService {
         var fillTanksEntity = new FillTanksEntity(fillTankDataRequest, LocalDateTime.now(), tank);
         return fillTankRepository.save(fillTanksEntity);
 
+    }
+
+    public Page<FillTankDataResponse> list(Pageable pagination) {
+        return fillTankRepository.findAll(pagination).map(FillTankDataResponse::new);
     }
 }
