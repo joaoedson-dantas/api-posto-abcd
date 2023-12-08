@@ -32,7 +32,7 @@ public class FuelTankEntity {
     public FuelTankEntity(FuelTankDataRequest fuelTankDataRequest, LocalDateTime dateTime) {
         if (fuelTankDataRequest.liters() > 0 && fuelTankDataRequest.name() != null) {
             this.setLiters(fuelTankDataRequest.liters());
-            this.setName(fuelTankDataRequest.name());
+            this.setName(fuelTankDataRequest.name().toUpperCase());
             this.setCreated_at(dateTime);
         }
     }
