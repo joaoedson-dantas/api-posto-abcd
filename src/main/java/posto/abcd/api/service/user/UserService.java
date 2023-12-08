@@ -1,9 +1,8 @@
-package posto.abcd.api.service;
+package posto.abcd.api.service.user;
 
 import org.springframework.stereotype.Service;
-import posto.abcd.api.dtos.user.UserDataResponse;
 import posto.abcd.api.entity.user.UserEntity;
-import posto.abcd.api.repository.UserRepository;
+import posto.abcd.api.repository.user.UserRepository;
 
 @Service // para ser um serviço no spring e assim ser passível de injecao tem que anotar com @serivce
 public class UserService {

@@ -1,4 +1,4 @@
-package posto.abcd.api.repository;
+package posto.abcd.api.repository.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import posto.abcd.api.entity.user.UserEntity;

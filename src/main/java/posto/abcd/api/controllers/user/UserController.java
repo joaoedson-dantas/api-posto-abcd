@@ -7,7 +7,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import posto.abcd.api.dtos.user.UserDataResponse;
 import posto.abcd.api.dtos.user.UserDataRequest;
 import posto.abcd.api.entity.user.UserEntity;
-import posto.abcd.api.service.UserService;
+import posto.abcd.api.service.user.UserService;
 
 @RestController
 @RequestMapping("users")
