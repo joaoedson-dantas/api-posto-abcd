@@ -14,7 +14,7 @@ import java.util.List;
 public class FuelTankService {
 
 
-    private FuelTankRepository fuelTankRepository;
+    private final FuelTankRepository fuelTankRepository;
 
     public FuelTankService(FuelTankRepository fuelTankRepository) {
         this.fuelTankRepository = fuelTankRepository;

@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 @Service
 public class FillTankService {
 
-    private FillTankRepository fillTankRepository;
-    private FuelTankRepository fuelTankRepository;
+    private final FillTankRepository fillTankRepository;
+    private final FuelTankRepository fuelTankRepository;
 
     public FillTankService(FillTankRepository fillTankRepository, FuelTankRepository fuelTankRepository) {
         this.fillTankRepository = fillTankRepository;

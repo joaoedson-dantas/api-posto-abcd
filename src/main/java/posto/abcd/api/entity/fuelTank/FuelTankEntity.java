@@ -3,6 +3,7 @@ package posto.abcd.api.entity.fuelTank;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
+import posto.abcd.api.dtos.fuelPump.FuelPumpDataRequest;
 import posto.abcd.api.dtos.fuelTank.FuelTankDataRequest;
 
 import java.time.LocalDateTime;
@@ -36,6 +37,7 @@ public class FuelTankEntity {
             this.setCreated_at(dateTime);
         }
     }
+
 
 
     public void toFuel(Long numberOfLitersToFill) {
