@@ -34,4 +34,16 @@ public class GlobalSettingsController {
         return ResponseEntity.ok(globalSettingsList);
     }
 
+    @GetMapping("/key/{key}")
+    public ResponseEntity<GlobalSettingsDataResponse> getGlobalSettingsByKey(@PathVariable String key) {
+        var settings = globalSettingsService.getGlobalSettingsByKey(key);
+        return ResponseEntity.ok(settings);
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<GlobalSettingsDataResponse> getGlobalSettingsById(@PathVariable String id) {
+        var settings = globalSettingsService.getGlobalSettingsByKey(id);
+        return ResponseEntity.ok(settings);
+    }
+
 }
