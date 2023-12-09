@@ -46,4 +46,10 @@ public class FuelTankEntity {
         }
     }
 
+    public void drain(Long numberOfLitersToDrain) {
+        if (numberOfLitersToDrain != null && numberOfLitersToDrain > 0 && numberOfLitersToDrain < this.getLiters()) {
+            this.setLiters(this.getLiters() - numberOfLitersToDrain);
+        }
+    }
+
 }

@@ -23,7 +23,7 @@ public class GlobalSettingsService {
 
     @Transactional
     public GlobalSettingsEntity create(GlobalSettingsDataRequest globalSettingsDataRequest) {
-        System.out.println("oi");
+
         var globalSettingsEntity = new GlobalSettingsEntity(globalSettingsDataRequest);
 
         return globalSettingsRepository.save(globalSettingsEntity);

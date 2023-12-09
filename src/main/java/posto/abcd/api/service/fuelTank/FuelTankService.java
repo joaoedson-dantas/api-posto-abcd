@@ -48,4 +48,12 @@ public class FuelTankService {
         return fuelTanks;
     }
 
+    public FuelTankEntity findById(Long id) {
+        var fuelTank = fuelTankRepository.getReferenceById(id);
+
+        if (fuelTank.getId() == null) {
+            throw new EntityNotFoundException();
+        }
+        return fuelTank;
+    }
 }
