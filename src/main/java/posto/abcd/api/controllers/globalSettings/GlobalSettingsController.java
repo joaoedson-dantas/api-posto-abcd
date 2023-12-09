@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataRequest;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataResponse;
-import posto.abcd.api.entity.globalSettings.GlobalSettingsEntity;
+
 import posto.abcd.api.service.globalSettings.GlobalSettingsService;
 
 @RestController
