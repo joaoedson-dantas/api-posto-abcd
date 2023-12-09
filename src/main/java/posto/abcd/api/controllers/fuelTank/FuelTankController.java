@@ -35,9 +35,7 @@ public class FuelTankController {
 
     @GetMapping("/fueltank/{name}")
     public ResponseEntity<FuelTankEntity> findByFuelType(@PathVariable @Valid String name) {
-        System.out.println(name);
         var tank = fuelTankService.findByFuelType(name);
-        System.out.println(tank);
         return ResponseEntity.ok(tank);
 
     }
