@@ -8,7 +8,7 @@ import posto.abcd.api.dtos.fuelTank.FuelTankDataRequest;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "FuelTankEntity")
 @Table(name = "fuelTanks")
 @Getter
 @NoArgsConstructor

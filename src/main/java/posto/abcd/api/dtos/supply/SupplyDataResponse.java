@@ -1,5 +1,8 @@
 package posto.abcd.api.dtos.supply;
 
+import posto.abcd.api.entity.supply.SupplyEntity;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record SupplyDataResponse(
@@ -8,6 +11,9 @@ public record SupplyDataResponse(
         Long liters,
         Long price,
         int tax,
-        String fuel_pomp_id
+        Long fuel_pomp_id
 ) {
+    public SupplyDataResponse(SupplyEntity supplyEntity) {
+        this(supplyEntity.getId(), supplyEntity.getDate(), supplyEntity.getLiters(), supplyEntity.getPrice(), supplyEntity.getTax(), supplyEntity.getFuelPumpEntity().getId());
+    }
 }

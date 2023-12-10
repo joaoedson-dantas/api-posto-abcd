@@ -4,10 +4,9 @@ package posto.abcd.api.entity.fuelPump;
 import jakarta.persistence.*;
 import lombok.*;
 import posto.abcd.api.dtos.fuelPump.FuelPumpDataRequest;
-import posto.abcd.api.dtos.fuelTank.FuelTankDataRequest;
 import posto.abcd.api.entity.fuelTank.FuelTankEntity;
 
-@Entity
+@Entity(name = "FuelPumpEntity")
 @Table(name = "fuelPumps")
 @Getter
 @AllArgsConstructor
@@ -22,7 +21,7 @@ public class FuelPumpEntity {
     private String name;
 
     @Setter
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fuel_tank_id")
     private FuelTankEntity fuelTankEntity;
 

@@ -1,9 +1,13 @@
 package posto.abcd.api.service.fuelTank;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import posto.abcd.api.dtos.fuelTank.FuelTankDataList;
 import posto.abcd.api.dtos.fuelTank.FuelTankDataRequest;
+import posto.abcd.api.dtos.fuelTank.FuelTankDataResponse;
 import posto.abcd.api.entity.fuelTank.FuelTankEntity;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
 
@@ -27,17 +31,14 @@ public class FuelTankService {
         fuelTankRepository.save(fuelTankEntity);
         return fuelTankEntity;
     }
-
-    public List<FuelTankEntity> list() {
-        var fuelTanks =  fuelTankRepository.findAll();
-
-        if (fuelTanks == null) {
-            throw new EntityNotFoundException();
-        }
-
-        return fuelTanks;
+    @Transactional
+    public Page<FuelTankDataList> list(Pageable pagination) {
+        return fuelTankRepository.findAll(pagination)
+                .map(FuelTankDataList::new);
     }
 
+
+    @Transactional
     public FuelTankEntity findByFuelType(String name) {
         var fuelTanks =  fuelTankRepository.findByName(name.toUpperCase()).orElseThrow(() -> new EntityNotFoundException("Tipo de tank não encontrado: " + name));
 
@@ -47,7 +48,7 @@ public class FuelTankService {
 
         return fuelTanks;
     }
-
+    @Transactional
     public FuelTankEntity findById(Long id) {
         var fuelTank = fuelTankRepository.getReferenceById(id);
 

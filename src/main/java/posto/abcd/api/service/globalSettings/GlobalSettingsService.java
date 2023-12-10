@@ -33,6 +33,7 @@ public class GlobalSettingsService {
         return globalSettingsRepository.findAll(pagination).map(GlobalSettingsDataResponse::new);
     }
 
+    @Transactional
     public GlobalSettingsDataResponse getGlobalSettingsByKey(String key) {
         var settings = globalSettingsRepository.findByKey(key).orElseThrow(() -> new EntityNotFoundException("Não foi possível encontrar a chave" + key));
 
@@ -43,6 +44,7 @@ public class GlobalSettingsService {
         return new GlobalSettingsDataResponse(settings);
     }
 
+    @Transactional
     public GlobalSettingsDataResponse getGlobalSettingsById(Long id) {
 
         try {
