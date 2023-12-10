@@ -1,6 +1,7 @@
 package posto.abcd.api.service.user;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import posto.abcd.api.entity.user.UserEntity;
@@ -10,13 +11,18 @@ import posto.abcd.api.repository.user.UserRepository;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
     public UserEntity create(UserEntity user) {
+
+        var password = passwordEncoder.encode(user.getPassword_hash());
+        user.setPassword_hash(password);
 
        return userRepository.save(user);
     }
