@@ -9,7 +9,7 @@ public record SupplyDataResponse(
         Long id,
         LocalDateTime date,
         Long liters,
-        Long price,
+        BigDecimal price,
         int tax,
         Long fuel_pomp_id
 ) {
