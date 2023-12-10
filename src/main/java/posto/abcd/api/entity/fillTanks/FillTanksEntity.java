@@ -9,7 +9,7 @@ import posto.abcd.api.entity.fuelTank.FuelTankEntity;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "FillTanksEntity")
 @Table(name = "fillTanks")
 @Getter
 @AllArgsConstructor
@@ -21,8 +21,9 @@ public class FillTanksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date")
+
     @Setter
+    @Column(name = "date")
     private LocalDateTime date;
 
 
@@ -31,7 +32,7 @@ public class FillTanksEntity {
     private Long liters;
 
     @Setter
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fuel_tank_id")
     private FuelTankEntity fuelTankEntity;
 
