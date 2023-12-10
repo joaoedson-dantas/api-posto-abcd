@@ -4,19 +4,17 @@ package posto.abcd.api.entity.supply;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
-import posto.abcd.api.dtos.supply.SupplyDataResquet;
 import posto.abcd.api.entity.fuelPump.FuelPumpEntity;
-
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "SupplyEntity")
 @Table(name = "supplies")
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class SupplyEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,7 +29,7 @@ public class SupplyEntity {
 
     @Setter
     @Min(0)
-    private BigDecimal price;
+    private Long price;
 
     @Setter
     @Min(0)
@@ -39,18 +37,23 @@ public class SupplyEntity {
 
 
     @Setter
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fuel_pomp_id")
     private FuelPumpEntity fuelPumpEntity;
 
 
-    public SupplyEntity(SupplyDataResquet supplyDataResquet, BigDecimal price, BigDecimal tax, FuelPumpEntity pump) {
-        if(supplyDataResquet.liters() > 0 ) {
-            this.setDate(supplyDataResquet.date());
-            this.setLiters(supplyDataResquet.liters());
-            this.setFuelPumpEntity(pump);
-            this.setTax(tax.byteValueExact());
-            this.setPrice(price);
-        }
+
+    public SupplyEntity(LocalDateTime date, Long liters, long price, int taxAmount, FuelPumpEntity fuelPumpEntity) {
+        System.out.println("teste 1 -> " + fuelPumpEntity.getId());
+        System.out.println("Teste 2 -> " + fuelPumpEntity.getName());
+
+        this.setDate(date);
+        this.setLiters(liters);
+        this.setPrice(price);
+        this.setTax(taxAmount);
+        this.setFuelPumpEntity(fuelPumpEntity);
+
     }
+
+
 }
