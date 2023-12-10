@@ -1,20 +1,23 @@
 package posto.abcd.api.service.user;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import posto.abcd.api.entity.user.UserEntity;
 import posto.abcd.api.repository.user.UserRepository;
 
-@Service // para ser um serviço no spring e assim ser passível de injecao tem que anotar com @serivce
+@Service
 public class UserService {
-    // Aqui colocamos todas as opercões que iremos realizar. Use Case
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public UserEntity create(UserEntity user) {
+
        return userRepository.save(user);
     }
 
