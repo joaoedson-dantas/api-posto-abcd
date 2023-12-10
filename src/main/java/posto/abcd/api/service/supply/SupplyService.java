@@ -1,8 +1,11 @@
 package posto.abcd.api.service.supply;
 
 import jakarta.validation.ValidationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import posto.abcd.api.dtos.supply.SupplyDataResponse;
 import posto.abcd.api.dtos.supply.SupplyDataResquet;
 import posto.abcd.api.entity.supply.SupplyEntity;
 import posto.abcd.api.repository.fuelPump.FuelPumpRespository;
@@ -68,4 +71,10 @@ public class SupplyService {
         tank.drain(supplyDataResquet.liters());
         return supplyRepository.save(supplyEntity);
     }
+
+
+    public Page<SupplyDataResponse> findAllSupply(Pageable pagination) {
+        return supplyRepository.findAll(pagination).map(SupplyDataResponse::new);
+    }
 }
+
