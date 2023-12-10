@@ -1,10 +1,7 @@
 package posto.abcd.api.entity.user;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import posto.abcd.api.dtos.user.UserDataRequest;
 
 
@@ -21,6 +18,7 @@ public class UserEntity {
     private Long id;
     private String name;
     private String login;
+    @Setter
     private String password_hash;
 
     public UserEntity(UserDataRequest userData) {
