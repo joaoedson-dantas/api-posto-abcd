@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 import posto.abcd.api.entity.fuelPump.FuelPumpEntity;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity(name = "SupplyEntity")
@@ -29,7 +31,7 @@ public class SupplyEntity {
 
     @Setter
     @Min(0)
-    private Long price;
+    private BigDecimal price;
 
     @Setter
     @Min(0)
@@ -43,9 +45,7 @@ public class SupplyEntity {
 
 
 
-    public SupplyEntity(LocalDateTime date, Long liters, long price, int taxAmount, FuelPumpEntity fuelPumpEntity) {
-        System.out.println("teste 1 -> " + fuelPumpEntity.getId());
-        System.out.println("Teste 2 -> " + fuelPumpEntity.getName());
+    public SupplyEntity(LocalDateTime date, Long liters, BigDecimal price, int taxAmount, FuelPumpEntity fuelPumpEntity) {
 
         this.setDate(date);
         this.setLiters(liters);
