@@ -32,9 +32,10 @@ public class AuthUserService {
                 }
         );
 
-        var passwordMatches = this.passwordEncoder.matches(authUserDTO.password(), user.getPassword_hash());
+        var passwordMatches = this.passwordEncoder.matches(authUserDTO.password_hash(), user.getPassword_hash());
+
         if (!passwordMatches) {
-           throw new AuthenticationException();
+           throw new AuthenticationException("erro teste");
         }
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
