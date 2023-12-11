@@ -12,8 +12,8 @@ import posto.abcd.api.service.user.UserService;
 @RestController
 @RequestMapping("users")
 public class UserController {
-    // Injetendo a dependecia do service
-    private UserService userService;
+
+    private final UserService userService;
     public UserController(UserService userService) {
         this.userService = userService;
     }

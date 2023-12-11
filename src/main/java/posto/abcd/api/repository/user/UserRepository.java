@@ -3,6 +3,8 @@ package posto.abcd.api.repository.user;
 import org.springframework.data.jpa.repository.JpaRepository;
 import posto.abcd.api.entity.user.UserEntity;
 
+import java.util.Optional;
+
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    boolean findByLogin(String login);
+    Optional<UserEntity>findByLogin(String login);
 }
