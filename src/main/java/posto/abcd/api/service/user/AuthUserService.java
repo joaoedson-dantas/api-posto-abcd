@@ -12,6 +12,8 @@ import posto.abcd.api.dtos.user.AuthUserDTO;
 import posto.abcd.api.repository.user.UserRepository;
 
 import javax.naming.AuthenticationException;
+import java.time.Duration;
+import java.time.Instant;
 
 @Service
 public class AuthUserService {
@@ -41,6 +43,7 @@ public class AuthUserService {
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
 
         var token = JWT.create().withIssuer(user.getName())
+                .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
                 .withSubject(user.getId().toString())
                 .sign(algorithm);
 
