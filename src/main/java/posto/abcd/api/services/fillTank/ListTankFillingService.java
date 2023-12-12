@@ -1,4 +1,4 @@
-package posto.abcd.api.service.fillTank;
+package posto.abcd.api.services.fillTank;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import posto.abcd.api.dtos.user.AuthUserDTO;
-import posto.abcd.api.service.user.AuthUserService;
+import posto.abcd.api.services.user.AuthUserService;
 
 
 @RestController

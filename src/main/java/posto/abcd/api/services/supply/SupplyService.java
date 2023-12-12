@@ -1,4 +1,4 @@
-package posto.abcd.api.service.supply;
+package posto.abcd.api.services.supply;
 
 import jakarta.validation.ValidationException;
 import org.springframework.data.domain.Page;
@@ -11,7 +11,7 @@ import posto.abcd.api.entity.supply.SupplyEntity;
 import posto.abcd.api.repository.fuelPump.FuelPumpRespository;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
 import posto.abcd.api.repository.supply.SupplyRepository;
-import posto.abcd.api.service.globalSettings.GlobalSettingsService;
+import posto.abcd.api.services.globalSettings.GlobalSettingsService;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 

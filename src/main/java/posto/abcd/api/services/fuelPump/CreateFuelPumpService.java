@@ -1,4 +1,4 @@
-package posto.abcd.api.service.fuelPump;
+package posto.abcd.api.services.fuelPump;
 
 
 import jakarta.persistence.EntityNotFoundException;
@@ -12,18 +12,17 @@ import posto.abcd.api.dtos.fuelPump.FuelPumpDataRequest;
 import posto.abcd.api.dtos.fuelPump.FuelPumpDataResponse;
 
 import posto.abcd.api.entity.fuelPump.FuelPumpEntity;
-import posto.abcd.api.repository.fillTank.FillTankRepository;
 import posto.abcd.api.repository.fuelPump.FuelPumpRespository;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
 
 @Service
 
-public class FuelPumpService {
+public class CreateFuelPumpService {
 
     private final FuelPumpRespository fuelPumpRespository;
     private final FuelTankRepository fuelTankRepository;
 
-    public FuelPumpService(FuelPumpRespository fuelPumpRespository, FuelTankRepository fuelTankRepository) {
+    public CreateFuelPumpService(FuelPumpRespository fuelPumpRespository, FuelTankRepository fuelTankRepository) {
         this.fuelPumpRespository = fuelPumpRespository;
         this.fuelTankRepository = fuelTankRepository;
     }
@@ -41,10 +40,7 @@ public class FuelPumpService {
 
         return fuelPumpRespository.save(fuelPumpEntity);
     }
-    @Transactional
-    public Page<FuelPumpDataResponse> GetAllPumpsFuel(Pageable pagination) {
-        return fuelPumpRespository.findAll(pagination).map(FuelPumpDataResponse::new);
-    }
+
 
     @Transactional
     public FuelPumpEntity getPumpById(Long fuelPumpIdRequest) {

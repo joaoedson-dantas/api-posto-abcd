@@ -1,4 +1,4 @@
-package posto.abcd.api.service.globalSettings;
+package posto.abcd.api.services.globalSettings;
 
 
 import jakarta.persistence.EntityNotFoundException;

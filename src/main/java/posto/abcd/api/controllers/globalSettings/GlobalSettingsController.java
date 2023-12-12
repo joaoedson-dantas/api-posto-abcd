@@ -11,7 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataRequest;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataResponse;
 
-import posto.abcd.api.service.globalSettings.GlobalSettingsService;
+import posto.abcd.api.services.globalSettings.GlobalSettingsService;
 
 @RestController
 @RequestMapping("/global-settings")

@@ -1,4 +1,4 @@
-package posto.abcd.api.service.user;
+package posto.abcd.api.services.user;
 
 
 import com.auth0.jwt.JWT;

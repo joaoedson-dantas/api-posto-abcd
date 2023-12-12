@@ -13,9 +13,7 @@ import posto.abcd.api.dtos.fuelTank.FuelTankDataList;
 import posto.abcd.api.dtos.fuelTank.FuelTankDataRequest;
 import posto.abcd.api.dtos.fuelTank.FuelTankDataResponse;
 import posto.abcd.api.entity.fuelTank.FuelTankEntity;
-import posto.abcd.api.service.fuelTank.FuelTankService;
-
-import java.util.List;
+import posto.abcd.api.services.fuelTank.FuelTankService;
 
 @RestController
 @RequestMapping("/fuel-tanks")

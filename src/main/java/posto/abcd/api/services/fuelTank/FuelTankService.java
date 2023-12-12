@@ -1,4 +1,4 @@
-package posto.abcd.api.service.fuelTank;
+package posto.abcd.api.services.fuelTank;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -7,12 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import posto.abcd.api.dtos.fuelTank.FuelTankDataList;
 import posto.abcd.api.dtos.fuelTank.FuelTankDataRequest;
-import posto.abcd.api.dtos.fuelTank.FuelTankDataResponse;
 import posto.abcd.api.entity.fuelTank.FuelTankEntity;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class FuelTankService {

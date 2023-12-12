@@ -1,4 +1,4 @@
-package posto.abcd.api.service.user;
+package posto.abcd.api.services.user;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

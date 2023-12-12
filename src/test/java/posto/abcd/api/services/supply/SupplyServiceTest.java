@@ -1,4 +1,4 @@
-package posto.abcd.api.service.supply;
+package posto.abcd.api.services.supply;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,9 +12,9 @@ import posto.abcd.api.dtos.fuelTank.FuelTankDataRequest;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataRequest;
 import posto.abcd.api.dtos.supply.SupplyDataResquet;
 import posto.abcd.api.repository.supply.SupplyRepository;
-import posto.abcd.api.service.fuelPump.FuelPumpService;
-import posto.abcd.api.service.fuelTank.FuelTankService;
-import posto.abcd.api.service.globalSettings.GlobalSettingsService;
+import posto.abcd.api.services.fuelPump.CreateFuelPumpService;
+import posto.abcd.api.services.fuelTank.FuelTankService;
+import posto.abcd.api.services.globalSettings.GlobalSettingsService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -42,7 +42,7 @@ class SupplyServiceTest {
     private FuelTankService fuelTankService;
 
     @Autowired
-    private FuelPumpService fuelPumpService;
+    private CreateFuelPumpService createFuelPumpService;
 
 
     @Test
@@ -54,7 +54,7 @@ class SupplyServiceTest {
         var tank = fuelTankService.create(fuelTankDataRequest);
 
         FuelPumpDataRequest fuelPumpDataRequest = new FuelPumpDataRequest("Bomba de Gasolina - 1", tank.getId());
-        var poump = fuelPumpService.createPump(fuelPumpDataRequest);
+        var poump = createFuelPumpService.createPump(fuelPumpDataRequest);
 
         GlobalSettingsDataRequest globalSettingsFuel = new GlobalSettingsDataRequest("valor do combustível Gasolina", "fuel_price", "5");
         GlobalSettingsDataRequest globalSettingsTax = new GlobalSettingsDataRequest("valor do imposto", "tax_value", "13");
@@ -84,7 +84,7 @@ class SupplyServiceTest {
         var tank = fuelTankService.create(fuelTankDataRequest);
 
         FuelPumpDataRequest fuelPumpDataRequest = new FuelPumpDataRequest("Bomba de Gasolina - 1", tank.getId());
-        var poump = fuelPumpService.createPump(fuelPumpDataRequest);
+        var poump = createFuelPumpService.createPump(fuelPumpDataRequest);
 
         GlobalSettingsDataRequest globalSettingsFuel = new GlobalSettingsDataRequest("valor do combustível Gasolina", "fuel_price", "5");
         GlobalSettingsDataRequest globalSettingsTax = new GlobalSettingsDataRequest("valor do imposto", "tax_value", "13");

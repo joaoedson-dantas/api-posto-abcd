@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import posto.abcd.api.dtos.supply.SupplyDataResponse;
 import posto.abcd.api.dtos.supply.SupplyDataResquet;
-import posto.abcd.api.service.supply.SupplyService;
+import posto.abcd.api.services.supply.SupplyService;
 
 @RestController
 @RequestMapping("supply")

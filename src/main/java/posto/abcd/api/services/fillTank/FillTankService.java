@@ -1,12 +1,9 @@
-package posto.abcd.api.service.fillTank;
+package posto.abcd.api.services.fillTank;
 
 import jakarta.validation.ValidationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import posto.abcd.api.dtos.fillTank.FillTankDataRequest;
-import posto.abcd.api.dtos.fillTank.FillTankDataResponse;
 import posto.abcd.api.entity.fillTanks.FillTanksEntity;
 import posto.abcd.api.repository.fillTank.FillTankRepository;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;

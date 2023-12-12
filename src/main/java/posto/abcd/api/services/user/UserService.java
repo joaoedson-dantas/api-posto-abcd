@@ -1,6 +1,5 @@
-package posto.abcd.api.service.user;
+package posto.abcd.api.services.user;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
