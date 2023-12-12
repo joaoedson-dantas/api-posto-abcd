@@ -24,35 +24,11 @@ public class FuelTankService {
 
 
     @Transactional
-    public FuelTankEntity create(FuelTankDataRequest fuelTankDataRequest) {
-        var fuelTankEntity = new FuelTankEntity(fuelTankDataRequest, LocalDateTime.now());
-        fuelTankRepository.save(fuelTankEntity);
-        return fuelTankEntity;
-    }
-    @Transactional
     public Page<FuelTankDataList> list(Pageable pagination) {
         return fuelTankRepository.findAll(pagination)
                 .map(FuelTankDataList::new);
     }
 
 
-    @Transactional
-    public FuelTankEntity findByFuelType(String name) {
-        var fuelTanks =  fuelTankRepository.findByName(name.toUpperCase()).orElseThrow(() -> new EntityNotFoundException("Tipo de tank não encontrado: " + name));
 
-        if(fuelTanks == null) {
-            throw new EntityNotFoundException();
-        }
-
-        return fuelTanks;
-    }
-    @Transactional
-    public FuelTankEntity findById(Long id) {
-        var fuelTank = fuelTankRepository.getReferenceById(id);
-
-        if (fuelTank.getId() == null) {
-            throw new EntityNotFoundException();
-        }
-        return fuelTank;
-    }
 }
