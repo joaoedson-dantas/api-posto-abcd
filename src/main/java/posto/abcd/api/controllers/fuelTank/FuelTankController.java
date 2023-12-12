@@ -15,14 +15,14 @@ import posto.abcd.api.dtos.fuelTank.FuelTankDataResponse;
 import posto.abcd.api.entity.fuelTank.FuelTankEntity;
 import posto.abcd.api.services.fuelTank.CreateFuelTankService;
 import posto.abcd.api.services.fuelTank.FindByFuelTypeService;
-import posto.abcd.api.services.fuelTank.FuelTankService;
+import posto.abcd.api.services.fuelTank.ListFuelTankService;
 
 @RestController
 @RequestMapping("/fuel-tanks")
 public class FuelTankController {
 
     @Autowired
-    private FuelTankService fuelTankService;
+    private ListFuelTankService listFuelTankService;
 
     @Autowired
     private CreateFuelTankService createFuelTankService;
@@ -39,7 +39,7 @@ public class FuelTankController {
 
     @GetMapping
     public ResponseEntity<Page<FuelTankDataList>> listTanks(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
-        var tanksList = fuelTankService.list(paginacao);
+        var tanksList = listFuelTankService.list(paginacao);
         return ResponseEntity.ok(tanksList);
     }
 
