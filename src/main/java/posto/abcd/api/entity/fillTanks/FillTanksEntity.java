@@ -10,7 +10,7 @@ import posto.abcd.api.entity.fuelTank.FuelTankEntity;
 import java.time.LocalDateTime;
 
 @Entity(name = "FillTanksEntity")
-@Table(name = "fillTanks")
+@Table(name = "filltanks")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

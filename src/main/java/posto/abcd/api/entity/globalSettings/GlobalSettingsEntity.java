@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataRequest;
 
-@Entity(name = "GlobalSettingsEntity")
-@Table(name = "globalSettings")
+@Entity()
+@Table(name = "globalsettings")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

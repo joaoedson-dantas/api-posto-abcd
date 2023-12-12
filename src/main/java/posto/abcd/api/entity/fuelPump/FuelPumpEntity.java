@@ -6,8 +6,8 @@ import lombok.*;
 import posto.abcd.api.dtos.fuelPump.FuelPumpDataRequest;
 import posto.abcd.api.entity.fuelTank.FuelTankEntity;
 
-@Entity(name = "FuelPumpEntity")
-@Table(name = "fuelPumps")
+@Entity()
+@Table(name = "fuelpumps")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
