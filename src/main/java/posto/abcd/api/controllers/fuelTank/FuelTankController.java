@@ -17,6 +17,8 @@ import posto.abcd.api.services.fuelTank.CreateFuelTankService;
 import posto.abcd.api.services.fuelTank.FindByFuelTypeService;
 import posto.abcd.api.services.fuelTank.ListFuelTankService;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/fuel-tanks")
 public class FuelTankController {
@@ -44,7 +46,7 @@ public class FuelTankController {
     }
 
     @GetMapping("/fueltank/{name}")
-    public ResponseEntity<FuelTankEntity> findByFuelType(@PathVariable @Valid String name) {
+    public ResponseEntity<Optional<FuelTankEntity>> findByFuelType(@PathVariable @Valid String name) {
         var tank = findByFuelType.findByFuelType(name);
         return ResponseEntity.ok(tank);
     }

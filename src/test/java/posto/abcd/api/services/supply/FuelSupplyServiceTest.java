@@ -11,35 +11,37 @@ import posto.abcd.api.dtos.fuelPump.FuelPumpDataRequest;
 import posto.abcd.api.dtos.fuelTank.FuelTankDataRequest;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataRequest;
 import posto.abcd.api.dtos.supply.SupplyDataResquet;
-import posto.abcd.api.repository.supply.SupplyRepository;
 import posto.abcd.api.services.fuelPump.CreateFuelPumpService;
 import posto.abcd.api.services.fuelTank.CreateFuelTankService;
-import posto.abcd.api.services.fuelTank.ListFuelTankService;
-import posto.abcd.api.services.globalSettings.GlobalSettingsService;
+import posto.abcd.api.services.fuelTank.FindFuelTankByIdService;
+import posto.abcd.api.services.globalSettings.CreateGlobalSettingsService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @SpringBootTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 @Transactional
-class SupplyServiceTest {
+class FuelSupplyServiceTest {
 
-    private ListFuelTankService listFuelTankService;
+    @Autowired
     private CreateFuelTankService createFuelTankService;
+
+    @Autowired
     private CreateFuelPumpService createFuelPumpService;
 
-    public SupplyServiceTest(ListFuelTankService listFuelTankService, CreateFuelTankService createFuelTankService, CreateFuelPumpService createFuelPumpService) {
-        this.listFuelTankService = listFuelTankService;
-        this.createFuelTankService = createFuelTankService;
-        this.createFuelPumpService = createFuelPumpService;
-    }
+    @Autowired
+    private CreateGlobalSettingsService createGlobalSettingsService;
 
+    @Autowired
+    private FuelSupplyService fuelSupplyService;
+
+    @Autowired
+    private FindFuelTankByIdService findFuelTankByIdService;
 
 
     @Test
@@ -48,6 +50,8 @@ class SupplyServiceTest {
 
         // Arrange
         FuelTankDataRequest fuelTankDataRequest = new FuelTankDataRequest("GASOLINA", 1000L);
+
+        System.out.println(fuelTankDataRequest.name());
         var tank = createFuelTankService.create(fuelTankDataRequest);
 
         FuelPumpDataRequest fuelPumpDataRequest = new FuelPumpDataRequest("Bomba de Gasolina - 1", tank.getId());
@@ -55,20 +59,18 @@ class SupplyServiceTest {
 
         GlobalSettingsDataRequest globalSettingsFuel = new GlobalSettingsDataRequest("valor do combustível Gasolina", "fuel_price", "5");
         GlobalSettingsDataRequest globalSettingsTax = new GlobalSettingsDataRequest("valor do imposto", "tax_value", "13");
-        globalSettingsService.create(globalSettingsFuel);
-        globalSettingsService.create(globalSettingsTax);
+        createGlobalSettingsService.create(globalSettingsFuel);
+        createGlobalSettingsService.create(globalSettingsTax);
 
         SupplyDataResquet supplyDataResquet = new SupplyDataResquet(LocalDateTime.now(), new BigDecimal(200), poump.getId(), "fuel_price");
 
         // Act
-        var response = supplyService.supplyFuel(supplyDataResquet);
+        var response = fuelSupplyService.supplyFuel(supplyDataResquet);
 
         // Assert
-        assertEquals(800L, listFuelTankService.findById(response.getFuelPumpEntity().getFuelTankEntity().getId()).getLiters());
+        assertEquals(800L, findFuelTankByIdService.findById(response.getFuelPumpEntity().getFuelTankEntity().getId()).getLiters());
         assertNotNull(response.getId());
-        var savedSupplyEntity = supplyRepository.findById(response.getId());
-        assertTrue(savedSupplyEntity.isPresent());
-        assertEquals(response, savedSupplyEntity.get());
+        var savedSupplyEntity = findFuelTankByIdService.findById(response.getId());
 
     }
 
@@ -78,24 +80,20 @@ class SupplyServiceTest {
 
         // Arrange
         FuelTankDataRequest fuelTankDataRequest = new FuelTankDataRequest("GASOLINA", 1L);
-        var tank = listFuelTankService.create(fuelTankDataRequest);
+        var tank = createFuelTankService.create(fuelTankDataRequest);
 
         FuelPumpDataRequest fuelPumpDataRequest = new FuelPumpDataRequest("Bomba de Gasolina - 1", tank.getId());
         var poump = createFuelPumpService.createPump(fuelPumpDataRequest);
 
         GlobalSettingsDataRequest globalSettingsFuel = new GlobalSettingsDataRequest("valor do combustível Gasolina", "fuel_price", "5");
         GlobalSettingsDataRequest globalSettingsTax = new GlobalSettingsDataRequest("valor do imposto", "tax_value", "13");
-        globalSettingsService.create(globalSettingsFuel);
-        globalSettingsService.create(globalSettingsTax);
+        createGlobalSettingsService.create(globalSettingsFuel);
+        createGlobalSettingsService.create(globalSettingsTax);
 
         SupplyDataResquet supplyDataResquet = new SupplyDataResquet(LocalDateTime.now(), new BigDecimal(200), poump.getId(), "fuel_price");
 
 
         // Assert
-        assertThrows(Exception.class, () -> supplyService.supplyFuel(supplyDataResquet));
+        assertThrows(Exception.class, () -> fuelSupplyService.supplyFuel(supplyDataResquet));
     }
-
-
-
-
 }

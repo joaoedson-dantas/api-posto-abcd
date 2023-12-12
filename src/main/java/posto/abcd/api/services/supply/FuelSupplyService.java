@@ -1,34 +1,31 @@
 package posto.abcd.api.services.supply;
 
 import jakarta.validation.ValidationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import posto.abcd.api.dtos.supply.SupplyDataResponse;
 import posto.abcd.api.dtos.supply.SupplyDataResquet;
 import posto.abcd.api.entity.supply.SupplyEntity;
 import posto.abcd.api.repository.fuelPump.FuelPumpRespository;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
 import posto.abcd.api.repository.supply.SupplyRepository;
 import posto.abcd.api.services.globalSettings.GetGlobalSettingsByKeyService;
-import posto.abcd.api.services.globalSettings.GlobalSettingsService;
+import posto.abcd.api.services.globalSettings.CreateGlobalSettingsService;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @Service
-public class SupplyService {
+public class FuelSupplyService {
 
     private final SupplyRepository supplyRepository;
     private final FuelPumpRespository fuelPumpRespository;
     private final FuelTankRepository fuelTankRepository;
     private final GetGlobalSettingsByKeyService getGlobalSettingsByKeyService;
 
-    public SupplyService(SupplyRepository supplyRepository,
-                         FuelPumpRespository fuelPumpRespository,
-                         FuelTankRepository fuelTankRepository,
-                         GlobalSettingsService globalSettingsService,
-                         GetGlobalSettingsByKeyService getGlobalSettingsByKeyService)
+    public FuelSupplyService(SupplyRepository supplyRepository,
+                             FuelPumpRespository fuelPumpRespository,
+                             FuelTankRepository fuelTankRepository,
+                             CreateGlobalSettingsService createGlobalSettingsService,
+                             GetGlobalSettingsByKeyService getGlobalSettingsByKeyService)
     {
         this.supplyRepository = supplyRepository;
         this.fuelPumpRespository = fuelPumpRespository;
@@ -82,11 +79,6 @@ public class SupplyService {
         var supplyEntity = new SupplyEntity(supplyDataResquet.date(), supplyDataResquet.liters(), totalFuelPrice, taxAmount.intValue(), fuelPumpEntity);
         tank.drain(supplyDataResquet.liters().longValue());
         return supplyRepository.save(supplyEntity);
-    }
-
-
-    public Page<SupplyDataResponse> findAllSupply(Pageable pagination) {
-        return supplyRepository.findAll(pagination).map(SupplyDataResponse::new);
     }
 }
 

@@ -1,11 +1,12 @@
 package posto.abcd.api.services.fuelTank;
 
-
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import posto.abcd.api.entity.fuelTank.FuelTankEntity;
+import posto.abcd.api.infra.exceptions.TankAlreadyExistsException;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
+
+import java.util.Optional;
 
 @Service
 public class FindByFuelTypeService {
@@ -13,13 +14,14 @@ public class FindByFuelTypeService {
     @Autowired
     private FuelTankRepository repository;
 
-    public FuelTankEntity findByFuelType(String name) {
-        var fuelTanks =  repository.findByName(name.toUpperCase()).orElseThrow(() -> new EntityNotFoundException("Tipo de tank não encontrado: " + name));
+    public Optional<FuelTankEntity> findByFuelType(String name) {
 
-        if(fuelTanks == null) {
-            throw new EntityNotFoundException();
+        var fuelTanks =  repository.findByName(name.toUpperCase());
+
+        if(fuelTanks.isPresent()) {
+            throw new TankAlreadyExistsException(name);
         }
 
-        return fuelTanks;
+        return repository.findByName(name);
     }
 }

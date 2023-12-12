@@ -9,7 +9,6 @@ import posto.abcd.api.infra.exceptions.TankAlreadyExistsException;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Service
 public class CreateFuelTankService {
@@ -23,12 +22,10 @@ public class CreateFuelTankService {
     @Transactional
     public FuelTankEntity create(FuelTankDataRequest fuelTankDataRequest) {
 
-
         var tankExists = service.findByFuelType(fuelTankDataRequest.name().toUpperCase());
 
-
-        if (Objects.equals(tankExists.getName(), fuelTankDataRequest.name().toUpperCase())) {
-            throw  new TankAlreadyExistsException(fuelTankDataRequest.name());
+        if (tankExists.isPresent()) {
+            throw new TankAlreadyExistsException(fuelTankDataRequest.name());
         }
 
         var fuelTankEntity = new FuelTankEntity(fuelTankDataRequest, LocalDateTime.now());

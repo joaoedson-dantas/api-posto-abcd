@@ -20,14 +20,20 @@ import posto.abcd.api.services.globalSettings.ListAllGlobalSettings;
 @RequestMapping("/global-settings")
 public class GlobalSettingsController {
 
-    @Autowired
-    private CreateGlobalSettingsService createGlobalSettingsService;
-    @Autowired
-    private GetGlobalSettingsByKeyService getGlobalSettingsByKey;
-    @Autowired
-    private GetGlobalSettingsByIdService getGlobalSettingsByIdService;
-    @Autowired
-    private ListAllGlobalSettings listAllGlobalSettings;
+    private final CreateGlobalSettingsService createGlobalSettingsService;
+    private final GetGlobalSettingsByKeyService getGlobalSettingsByKeyService;
+    private final GetGlobalSettingsByIdService getGlobalSettingsByIdService;
+    private final ListAllGlobalSettings listAllGlobalSettings;
+
+    public  GlobalSettingsController(CreateGlobalSettingsService createGlobalSettingsService, GetGlobalSettingsByKeyService getGlobalSettingsByKeyService, GetGlobalSettingsByIdService getGlobalSettingsByIdService, ListAllGlobalSettings listAllGlobalSettings) {
+        this.createGlobalSettingsService = createGlobalSettingsService;
+        this.getGlobalSettingsByKeyService = getGlobalSettingsByKeyService;
+        this.getGlobalSettingsByIdService = getGlobalSettingsByIdService;
+        this.listAllGlobalSettings = listAllGlobalSettings;
+    }
+
+
+
 
 
 
@@ -47,7 +53,7 @@ public class GlobalSettingsController {
 
     @GetMapping("/key/{key}")
     public ResponseEntity<GlobalSettingsDataResponse> getGlobalSettingsByKey(@PathVariable String key) {
-        var settings = getGlobalSettingsByKey.getByKey(key);
+        var settings = getGlobalSettingsByKeyService.getByKey(key);
         return ResponseEntity.ok(settings);
     }
 
