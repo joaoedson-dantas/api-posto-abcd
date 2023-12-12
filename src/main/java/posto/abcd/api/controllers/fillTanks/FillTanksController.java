@@ -12,7 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import posto.abcd.api.dtos.fillTank.FillTankDataRequest;
 import posto.abcd.api.dtos.fillTank.FillTankDataResponse;
 import posto.abcd.api.service.fillTank.FillTankService;
-
+import posto.abcd.api.service.fillTank.ListTankFillingService;
 
 
 @RestController
@@ -21,6 +21,9 @@ public class FillTanksController {
 
     @Autowired
     private FillTankService fillTankService;
+
+    @Autowired
+    private ListTankFillingService listTankFillingService;
 
     @PostMapping
     public ResponseEntity<FillTankDataResponse> fillTank(@RequestBody @Valid FillTankDataRequest fillTankData, UriComponentsBuilder uriBuilder) {
@@ -33,7 +36,7 @@ public class FillTanksController {
 
     @GetMapping
     public ResponseEntity<Page<FillTankDataResponse>> listFillTanks(@PageableDefault(size = 10, page = 0, sort = {"date"}) Pageable pagination) {
-        var fillTanksList = fillTankService.list(pagination);
+        var fillTanksList = listTankFillingService.list(pagination);
         return ResponseEntity.ok(fillTanksList);
     }
 
