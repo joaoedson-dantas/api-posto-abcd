@@ -13,7 +13,8 @@ import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataRequest;
 import posto.abcd.api.dtos.supply.SupplyDataResquet;
 import posto.abcd.api.repository.supply.SupplyRepository;
 import posto.abcd.api.services.fuelPump.CreateFuelPumpService;
-import posto.abcd.api.services.fuelTank.FuelTankService;
+import posto.abcd.api.services.fuelTank.CreateFuelTankService;
+import posto.abcd.api.services.fuelTank.ListFuelTankService;
 import posto.abcd.api.services.globalSettings.GlobalSettingsService;
 
 import java.math.BigDecimal;
@@ -29,20 +30,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Transactional
 class SupplyServiceTest {
 
-    @Autowired
-    private SupplyService supplyService;
-
-    @Autowired
-    private  SupplyRepository supplyRepository;
-
-    @Autowired
-    private GlobalSettingsService globalSettingsService;
-
-    @Autowired
-    private FuelTankService fuelTankService;
-
-    @Autowired
+    private ListFuelTankService listFuelTankService;
+    private CreateFuelTankService createFuelTankService;
     private CreateFuelPumpService createFuelPumpService;
+
+    public SupplyServiceTest(ListFuelTankService listFuelTankService, CreateFuelTankService createFuelTankService, CreateFuelPumpService createFuelPumpService) {
+        this.listFuelTankService = listFuelTankService;
+        this.createFuelTankService = createFuelTankService;
+        this.createFuelPumpService = createFuelPumpService;
+    }
+
 
 
     @Test
@@ -51,7 +48,7 @@ class SupplyServiceTest {
 
         // Arrange
         FuelTankDataRequest fuelTankDataRequest = new FuelTankDataRequest("GASOLINA", 1000L);
-        var tank = fuelTankService.create(fuelTankDataRequest);
+        var tank = createFuelTankService.create(fuelTankDataRequest);
 
         FuelPumpDataRequest fuelPumpDataRequest = new FuelPumpDataRequest("Bomba de Gasolina - 1", tank.getId());
         var poump = createFuelPumpService.createPump(fuelPumpDataRequest);
@@ -67,7 +64,7 @@ class SupplyServiceTest {
         var response = supplyService.supplyFuel(supplyDataResquet);
 
         // Assert
-        assertEquals(800L, fuelTankService.findById(response.getFuelPumpEntity().getFuelTankEntity().getId()).getLiters());
+        assertEquals(800L, listFuelTankService.findById(response.getFuelPumpEntity().getFuelTankEntity().getId()).getLiters());
         assertNotNull(response.getId());
         var savedSupplyEntity = supplyRepository.findById(response.getId());
         assertTrue(savedSupplyEntity.isPresent());
@@ -81,7 +78,7 @@ class SupplyServiceTest {
 
         // Arrange
         FuelTankDataRequest fuelTankDataRequest = new FuelTankDataRequest("GASOLINA", 1L);
-        var tank = fuelTankService.create(fuelTankDataRequest);
+        var tank = listFuelTankService.create(fuelTankDataRequest);
 
         FuelPumpDataRequest fuelPumpDataRequest = new FuelPumpDataRequest("Bomba de Gasolina - 1", tank.getId());
         var poump = createFuelPumpService.createPump(fuelPumpDataRequest);

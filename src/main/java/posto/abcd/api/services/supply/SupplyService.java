@@ -11,6 +11,7 @@ import posto.abcd.api.entity.supply.SupplyEntity;
 import posto.abcd.api.repository.fuelPump.FuelPumpRespository;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
 import posto.abcd.api.repository.supply.SupplyRepository;
+import posto.abcd.api.services.globalSettings.GetGlobalSettingsByKeyService;
 import posto.abcd.api.services.globalSettings.GlobalSettingsService;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -21,13 +22,20 @@ public class SupplyService {
     private final SupplyRepository supplyRepository;
     private final FuelPumpRespository fuelPumpRespository;
     private final FuelTankRepository fuelTankRepository;
-    private final GlobalSettingsService globalSettingsService;
+    private final GetGlobalSettingsByKeyService getGlobalSettingsByKeyService;
 
-    public SupplyService(SupplyRepository supplyRepository, FuelPumpRespository fuelPumpRespository, FuelTankRepository fuelTankRepository, GlobalSettingsService globalSettingsService) {
+    public SupplyService(SupplyRepository supplyRepository,
+                         FuelPumpRespository fuelPumpRespository,
+                         FuelTankRepository fuelTankRepository,
+                         GlobalSettingsService globalSettingsService,
+                         GetGlobalSettingsByKeyService getGlobalSettingsByKeyService)
+    {
         this.supplyRepository = supplyRepository;
         this.fuelPumpRespository = fuelPumpRespository;
         this.fuelTankRepository = fuelTankRepository;
-        this.globalSettingsService = globalSettingsService;
+        this.getGlobalSettingsByKeyService = getGlobalSettingsByKeyService;
+
+
     }
 
     @Transactional
@@ -59,8 +67,8 @@ public class SupplyService {
         }
 
         // pegando a configuração do combustível para identificar qual tipo de combustível e seu devido valor;
-        var fuelSettings = globalSettingsService.getGlobalSettingsByKey(supplyDataResquet.fuel_key());
-        var taxValue = globalSettingsService.getGlobalSettingsByKey("tax_value");
+        var fuelSettings = getGlobalSettingsByKeyService.getByKey(supplyDataResquet.fuel_key());
+        var taxValue = getGlobalSettingsByKeyService.getByKey("tax_value");
 
         var pricePerLiter = new BigDecimal(fuelSettings.value());
         var liters = BigDecimal.valueOf(supplyDataResquet.liters().doubleValue());
