@@ -42,15 +42,7 @@ public class CreateFuelPumpService {
     }
 
 
-    @Transactional
-    public FuelPumpEntity getPumpById(Long fuelPumpIdRequest) {
 
-        if (!fuelPumpRespository.existsById(fuelPumpIdRequest)) {
-            throw new ValidationException("Id da bomba informada não existe!");
-        }
-
-        return fuelPumpRespository.getReferenceById(fuelPumpIdRequest);
-    }
     @Transactional
     public FuelPumpEntity getReferenceById(Long fuelPumpId) {
         return fuelPumpRespository.findById(fuelPumpId)
