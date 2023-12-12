@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public record SupplyDataResponse(
         Long id,
         LocalDateTime date,
-        Long liters,
+        BigDecimal liters,
         BigDecimal price,
         int tax,
         Long fuel_pomp_id
