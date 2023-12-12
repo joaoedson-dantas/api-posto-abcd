@@ -13,6 +13,7 @@ import posto.abcd.api.dtos.fuelTank.FuelTankDataList;
 import posto.abcd.api.dtos.fuelTank.FuelTankDataRequest;
 import posto.abcd.api.dtos.fuelTank.FuelTankDataResponse;
 import posto.abcd.api.entity.fuelTank.FuelTankEntity;
+import posto.abcd.api.services.fuelTank.CreateFuelTankService;
 import posto.abcd.api.services.fuelTank.FuelTankService;
 
 @RestController
@@ -22,9 +23,13 @@ public class FuelTankController {
     @Autowired
     private FuelTankService fuelTankService;
 
+    @Autowired
+    private CreateFuelTankService createFuelTankService;
+
+
     @PostMapping
     public ResponseEntity<FuelTankDataResponse> registerTank(@RequestBody @Valid FuelTankDataRequest fuelTankData, UriComponentsBuilder uriBuilder) {
-        var fuelTankEntity = fuelTankService.create(fuelTankData);
+        var fuelTankEntity = createFuelTankService.create(fuelTankData);
         var uri = uriBuilder.path("/fuel-tanks/{id}").buildAndExpand(fuelTankEntity.getId()).toUri();
         return  ResponseEntity.created(uri).body(new FuelTankDataResponse(fuelTankEntity));
     }
