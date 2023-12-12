@@ -12,7 +12,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import posto.abcd.api.dtos.fuelPump.FuelPumpDataRequest;
 import posto.abcd.api.dtos.fuelPump.FuelPumpDataResponse;
 import posto.abcd.api.services.fuelPump.CreateFuelPumpService;
-import posto.abcd.api.services.fuelPump.ListAllFuelPoumps;
+import posto.abcd.api.services.fuelPump.FindPumpByIdService;
+import posto.abcd.api.services.fuelPump.ListAllFuelPoumpsSerivce;
 
 @RestController
 @RequestMapping("fuel-pumps")
@@ -22,7 +23,10 @@ public class FuelPumpController {
     private CreateFuelPumpService createFuelPumpService;
 
     @Autowired
-    private ListAllFuelPoumps listAllFuelPoumps;
+    private ListAllFuelPoumpsSerivce listAllFuelPoumpsSerivce;
+
+    @Autowired
+    private FindPumpByIdService findPumpByIdService;
 
     @PostMapping
     public ResponseEntity<FuelPumpDataResponse> createPump(@RequestBody @Valid FuelPumpDataRequest fuelPumpData, UriComponentsBuilder uriBuilder) {
@@ -34,16 +38,14 @@ public class FuelPumpController {
 
     @GetMapping
     public ResponseEntity<Page<FuelPumpDataResponse>> listAllFuelPoumps(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable pagination) {
-        var pumpsList = listAllFuelPoumps.list(pagination);
+        var pumpsList = listAllFuelPoumpsSerivce.list(pagination);
         return ResponseEntity.ok(pumpsList);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<FuelPumpDataResponse> getPumpById(@PathVariable @Valid Long id) {
         System.out.println(id);
-        var pump = createFuelPumpService.getPumpById(id);
+        var pump = findPumpByIdService.getPumpById(id);
         return ResponseEntity.ok(new FuelPumpDataResponse(pump));
     }
-
-
 }
