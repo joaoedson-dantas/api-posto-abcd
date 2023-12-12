@@ -35,16 +35,5 @@ public class GlobalSettingsService {
 
 
 
-    @Transactional
-    public GlobalSettingsDataResponse getGlobalSettingsById(Long id) {
 
-        try {
-            var settings = globalSettingsRepository.getReferenceById(id);
-            return new GlobalSettingsDataResponse(settings);
-
-        } catch (EntityNotFoundException ex) {
-            throw new EntityNotFoundException();
-
-        }
-    }
 }

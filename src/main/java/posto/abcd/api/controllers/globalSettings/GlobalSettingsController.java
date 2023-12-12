@@ -11,6 +11,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataRequest;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataResponse;
 
+import posto.abcd.api.repository.globalSettings.GlobalSettingsRepository;
+import posto.abcd.api.services.globalSettings.GetGlobalSettingsByIdService;
 import posto.abcd.api.services.globalSettings.GetGlobalSettingsByKeyService;
 import posto.abcd.api.services.globalSettings.GlobalSettingsService;
 
@@ -23,6 +25,9 @@ public class GlobalSettingsController {
 
     @Autowired
     private GetGlobalSettingsByKeyService getGlobalSettingsByKey;
+
+    @Autowired
+    private GetGlobalSettingsByIdService getGlobalSettingsByIdService;
 
     @PostMapping
     public ResponseEntity<GlobalSettingsDataResponse> create(@RequestBody @Valid GlobalSettingsDataRequest globalSettingsDataRequest, UriComponentsBuilder uriBuilder) {
@@ -46,7 +51,7 @@ public class GlobalSettingsController {
 
     @GetMapping("/id/{id}")
     public ResponseEntity<GlobalSettingsDataResponse> getGlobalSettingsById(@PathVariable Long id) {
-        var settings = globalSettingsService.getGlobalSettingsById(id);
+        var settings = getGlobalSettingsByIdService.getById(id);
         return ResponseEntity.ok(settings);
     }
 
