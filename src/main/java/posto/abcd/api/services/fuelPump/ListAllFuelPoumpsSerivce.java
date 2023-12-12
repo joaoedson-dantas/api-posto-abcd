@@ -9,7 +9,7 @@ import posto.abcd.api.dtos.fuelPump.FuelPumpDataResponse;
 import posto.abcd.api.repository.fuelPump.FuelPumpRespository;
 
 @Service
-public class ListAllFuelPoumps {
+public class ListAllFuelPoumpsSerivce {
 
     @Autowired
     private FuelPumpRespository repository;
