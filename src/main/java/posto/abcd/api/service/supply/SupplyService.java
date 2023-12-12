@@ -33,11 +33,12 @@ public class SupplyService {
     @Transactional
     public SupplyEntity supplyFuel(SupplyDataResquet supplyDataResquet) {
 
+
         if (!fuelPumpRespository.existsById(supplyDataResquet.fuel_pomp_id())) {
             throw new ValidationException("Id do bomba informado não existe!");
         }
 
-        if (supplyDataResquet.liters() <= 0) {
+        if (supplyDataResquet.liters().floatValue() <= 0) {
             throw new IllegalArgumentException("A quantidade de litros para abastecimento deve ser positiva.");
         }
 
@@ -53,22 +54,25 @@ public class SupplyService {
 
         var tank = fuelTankRepository.getReferenceById(fuelPumpEntity.getFuelTankEntity().getId());
 
-        if (supplyDataResquet.liters() > tank.getLiters()) {
+        if (supplyDataResquet.liters().doubleValue() > tank.getLiters()) {
             throw new IllegalArgumentException("A quantidade de combustível no tank é insuficiente para o abastecimento");
         }
 
-        var pricePerLiter = new BigDecimal(globalSettingsService.getGlobalSettingsByKey("fuel_price").value());
-        var milliliters = new BigDecimal(supplyDataResquet.liters());
-        var liters = milliliters.divide(BigDecimal.valueOf(1000));
+        // pegando a configuração do combustível para identificar qual tipo de combustível e seu devido valor;
+        var fuelSettings = globalSettingsService.getGlobalSettingsByKey(supplyDataResquet.fuel_key());
+        var taxValue = globalSettingsService.getGlobalSettingsByKey("tax_value");
+
+        var pricePerLiter = new BigDecimal(fuelSettings.value());
+        var liters = BigDecimal.valueOf(supplyDataResquet.liters().doubleValue());
 
         var priceInAmount = pricePerLiter.multiply(liters);
-        var taxAmount = new BigDecimal(globalSettingsService.getGlobalSettingsByKey("tax_value").value());
+        var taxAmount = new BigDecimal(taxValue.value());
         var totalFuelPrice = priceInAmount.add(priceInAmount.multiply(taxAmount.divide(BigDecimal.valueOf(100))));
 
         totalFuelPrice = totalFuelPrice.setScale(2, RoundingMode.HALF_UP);
 
         var supplyEntity = new SupplyEntity(supplyDataResquet.date(), supplyDataResquet.liters(), totalFuelPrice, taxAmount.intValue(), fuelPumpEntity);
-        tank.drain(supplyDataResquet.liters());
+        tank.drain(supplyDataResquet.liters().longValue());
         return supplyRepository.save(supplyEntity);
     }
 

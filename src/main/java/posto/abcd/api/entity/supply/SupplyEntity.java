@@ -9,7 +9,7 @@ import posto.abcd.api.entity.fuelPump.FuelPumpEntity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity(name = "SupplyEntity")
+@Entity()
 @Table(name = "supplies")
 @Getter
 @AllArgsConstructor
@@ -27,7 +27,7 @@ public class SupplyEntity {
 
     @Setter
     @Min(0)
-    private Long liters;
+    private BigDecimal liters;
 
     @Setter
     @Min(0)
@@ -45,7 +45,7 @@ public class SupplyEntity {
 
 
 
-    public SupplyEntity(LocalDateTime date, Long liters, BigDecimal price, int taxAmount, FuelPumpEntity fuelPumpEntity) {
+    public SupplyEntity(LocalDateTime date, BigDecimal liters, BigDecimal price, int taxAmount, FuelPumpEntity fuelPumpEntity) {
 
         this.setDate(date);
         this.setLiters(liters);
