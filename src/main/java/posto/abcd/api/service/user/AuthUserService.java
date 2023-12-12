@@ -29,15 +29,13 @@ public class AuthUserService {
 
     public String execute(AuthUserDTO authUserDTO) throws AuthenticationException {
         var user = this.userRepository.findByLogin(authUserDTO.login()).orElseThrow(
-                () -> {
-                    throw new UsernameNotFoundException("Usuário não encontrado");
-                }
+                () -> new UsernameNotFoundException("Usuário não encontrado")
         );
 
         var passwordMatches = this.passwordEncoder.matches(authUserDTO.password_hash(), user.getPassword_hash());
 
         if (!passwordMatches) {
-           throw new AuthenticationException("erro teste");
+           throw new AuthenticationException();
         }
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
