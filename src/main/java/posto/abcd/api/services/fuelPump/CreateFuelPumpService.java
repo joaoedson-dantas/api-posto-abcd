@@ -40,13 +40,4 @@ public class CreateFuelPumpService {
 
         return fuelPumpRespository.save(fuelPumpEntity);
     }
-
-
-
-    @Transactional
-    public FuelPumpEntity getReferenceById(Long fuelPumpId) {
-        return fuelPumpRespository.findById(fuelPumpId)
-                .orElseThrow(() -> new EntityNotFoundException("Fuel pump not found for id: " + fuelPumpId));
-    }
-
 }
