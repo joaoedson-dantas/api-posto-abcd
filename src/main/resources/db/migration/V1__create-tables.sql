@@ -6,27 +6,27 @@ CREATE TABLE users (
 );
 
 
-CREATE TABLE globalSettings (
+CREATE TABLE globalsettings (
     id SERIAL PRIMARY KEY,
     label VARCHAR(100) NOT NULL,
     key VARCHAR(100) NOT NULL UNIQUE,
     value VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE fuelTanks (
+CREATE TABLE fueltanks (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     liters BIGINT NOT NULL,
     created_at TIMESTAMP NOT NULL
 );
 
-CREATE TABLE fuelPumps (
+CREATE TABLE fuelpumps (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     fuel_tank_id BIGINT NOT NULL REFERENCES fuelTanks(id)
 );
 
-CREATE TABLE fillTanks (
+CREATE TABLE filltanks (
     id SERIAL PRIMARY KEY,
     date TIMESTAMP NOT NULL,
     liters BIGINT NOT NULL,
