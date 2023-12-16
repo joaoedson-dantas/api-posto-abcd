@@ -11,6 +11,7 @@ import posto.abcd.api.services.user.UserService;
 
 @RestController
 @RequestMapping("users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity create(@RequestBody @Valid UserDataRequest userData, UriComponentsBuilder uriBulder) {
+    public ResponseEntity<UserDataResponse> create(@RequestBody @Valid UserDataRequest userData, UriComponentsBuilder uriBulder) {
 
         // convertendo de USerDataRequest para userEntity, pois o metodo create recebe uma Entity;
         var userEntity = new UserEntity(userData);
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}") // passando o parametro na rota
-    public ResponseEntity findUser(@PathVariable Long id) {
+    public ResponseEntity<UserDataResponse> findUser(@PathVariable Long id) {
         var user = userService.findUserId(id);
         return ResponseEntity.ok(new UserDataResponse(user));
     }

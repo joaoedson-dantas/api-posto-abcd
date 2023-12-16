@@ -18,6 +18,7 @@ import posto.abcd.api.services.globalSettings.ListAllGlobalSettings;
 
 @RestController
 @RequestMapping("/global-settings")
+@CrossOrigin(origins = "*")
 public class GlobalSettingsController {
 
     private final CreateGlobalSettingsService createGlobalSettingsService;

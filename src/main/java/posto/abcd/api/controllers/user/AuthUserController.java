@@ -12,6 +12,7 @@ import posto.abcd.api.services.user.AuthUserService;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "*")
 public class AuthUserController {
 
     @Autowired

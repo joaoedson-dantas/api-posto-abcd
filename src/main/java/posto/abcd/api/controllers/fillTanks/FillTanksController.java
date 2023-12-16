@@ -17,6 +17,7 @@ import posto.abcd.api.services.fillTank.ListTankFillingService;
 
 @RestController
 @RequestMapping("fill-tanks")
+@CrossOrigin(origins = "*")
 public class FillTanksController {
 
     @Autowired

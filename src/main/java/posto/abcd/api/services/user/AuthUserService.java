@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import posto.abcd.api.dtos.user.AuthUserDTO;
+import posto.abcd.api.dtos.user.AuthUserDataResponse;
 import posto.abcd.api.repository.user.UserRepository;
 
 import javax.naming.AuthenticationException;
@@ -27,7 +28,7 @@ public class AuthUserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String execute(AuthUserDTO authUserDTO) throws AuthenticationException {
+    public AuthUserDataResponse execute(AuthUserDTO authUserDTO) throws AuthenticationException {
         var user = this.userRepository.findByLogin(authUserDTO.login()).orElseThrow(
                 () -> new UsernameNotFoundException("Usuário não encontrado")
         );
@@ -45,6 +46,6 @@ public class AuthUserService {
                 .withSubject(user.getId().toString())
                 .sign(algorithm);
 
-        return token;
+        return new AuthUserDataResponse(user, token);
     }
 }

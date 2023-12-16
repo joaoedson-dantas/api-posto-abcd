@@ -21,6 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/fuel-tanks")
+@CrossOrigin(origins = "*")
 public class FuelTankController {
 
     @Autowired

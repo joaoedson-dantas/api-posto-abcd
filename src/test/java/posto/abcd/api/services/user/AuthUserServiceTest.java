@@ -53,7 +53,7 @@ class AuthUserServiceTest {
 
         // Assert
         assertNotNull(token, "O token não deveria ser nulo");
-        assertFalse(token.isEmpty(), "O token deveria ter um comprimento maior que 0");
+        assertFalse(token.token().isEmpty(), "O token deveria ter um comprimento maior que 0");
     }
 
     @Test

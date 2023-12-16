@@ -17,6 +17,7 @@ import posto.abcd.api.services.fuelPump.ListAllFuelPoumpsSerivce;
 
 @RestController
 @RequestMapping("fuel-pumps")
+@CrossOrigin(origins = "*")
 public class FuelPumpController {
 
     @Autowired

@@ -6,10 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import posto.abcd.api.dtos.supply.SupplyDataResponse;
 import posto.abcd.api.dtos.supply.SupplyDataResquet;
@@ -18,6 +15,7 @@ import posto.abcd.api.services.supply.FuelSupplyService;
 
 @RestController
 @RequestMapping("supply")
+@CrossOrigin(origins = "*")
 public class SupplyController {
 
     @Autowired
