@@ -20,7 +20,13 @@ public class CreateGlobalSettingsService {
     @Transactional
     public GlobalSettingsEntity create(GlobalSettingsDataRequest globalSettingsDataRequest) {
 
-        var globalSettingsEntity = new GlobalSettingsEntity(globalSettingsDataRequest);
+        String value = globalSettingsDataRequest.value();
+
+        if (value.contains(",") || value.contains(".")) {
+            value = value.replace(',', '.');
+        }
+
+        var globalSettingsEntity = new GlobalSettingsEntity(globalSettingsDataRequest, value);
 
         return globalSettingsRepository.save(globalSettingsEntity);
     }

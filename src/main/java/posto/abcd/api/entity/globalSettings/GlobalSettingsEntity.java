@@ -44,4 +44,9 @@ public class GlobalSettingsEntity {
         this.setValue(settingsUpdateDataRequest.value());
         this.setLabel(settingsUpdateDataRequest.label());
     }
+
+    public GlobalSettingsEntity(GlobalSettingsDataRequest globalSettingsDataRequest, String value) {
+        this.setValue(value);
+        this.setLabel(globalSettingsDataRequest.label());
+    }
 }

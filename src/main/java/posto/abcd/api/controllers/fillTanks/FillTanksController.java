@@ -36,7 +36,7 @@ public class FillTanksController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<FillTankDataResponse>> listFillTanks(@PageableDefault(size = 10, page = 0, sort = {"date"}) Pageable pagination) {
+    public ResponseEntity<Page<FillTankDataResponse>> listFillTanks(@PageableDefault(sort = {"date"}) Pageable pagination) {
         var fillTanksList = listTankFillingService.list(pagination);
         return ResponseEntity.ok(fillTanksList);
     }
