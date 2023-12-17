@@ -14,11 +14,9 @@ public class GetGlobalSettingsByKeyService {
     private GlobalSettingsRepository repository;
 
     public GlobalSettingsDataResponse getByKey(String key) {
-        var settings = repository.findByKey(key).orElseThrow(() -> new EntityNotFoundException("Não foi possível encontrar a chave" + key));
-
-        if (settings == null) {
-            throw new EntityNotFoundException();
-        }
+        System.out.println(key);
+        var settings = repository.findByKey(key)
+                .orElseThrow(() -> new EntityNotFoundException("Não foi possível encontrar a chave " + key));
 
         return new GlobalSettingsDataResponse(settings);
     }

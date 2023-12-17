@@ -17,6 +17,7 @@ import posto.abcd.api.services.fuelTank.CreateFuelTankService;
 import posto.abcd.api.services.fuelTank.FindByFuelTypeService;
 import posto.abcd.api.services.fuelTank.ListFuelTankService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -41,8 +42,8 @@ public class FuelTankController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<FuelTankDataList>> listTanks(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
-        var tanksList = listFuelTankService.list(paginacao);
+    public ResponseEntity<List<FuelTankDataList>> listTanks(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
+        var tanksList = listFuelTankService.list(paginacao).stream().toList();
         return ResponseEntity.ok(tanksList);
     }
 

@@ -4,6 +4,7 @@ package posto.abcd.api.entity.globalSettings;
 import jakarta.persistence.*;
 import lombok.*;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataRequest;
+import posto.abcd.api.dtos.globalSettings.SettingsUpdateDataRequest;
 
 @Entity()
 @Table(name = "globalsettings")
@@ -31,5 +32,16 @@ public class GlobalSettingsEntity {
         this.setLabel(globalSettingsDataRequest.label());
         this.setKey(globalSettingsDataRequest.key());
         this.setValue(globalSettingsDataRequest.value());
+    }
+
+    public GlobalSettingsEntity(SettingsUpdateDataRequest settingsUpdateDataRequest, String key) {
+        this.setValue(settingsUpdateDataRequest.value());
+        this.setKey(key);
+        this.setLabel(settingsUpdateDataRequest.label());
+    }
+
+    public GlobalSettingsEntity(SettingsUpdateDataRequest settingsUpdateDataRequest) {
+        this.setValue(settingsUpdateDataRequest.value());
+        this.setLabel(settingsUpdateDataRequest.label());
     }
 }

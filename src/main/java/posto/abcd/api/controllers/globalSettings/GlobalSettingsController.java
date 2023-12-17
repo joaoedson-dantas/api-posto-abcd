@@ -11,10 +11,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataRequest;
 import posto.abcd.api.dtos.globalSettings.GlobalSettingsDataResponse;
 
-import posto.abcd.api.services.globalSettings.GetGlobalSettingsByIdService;
-import posto.abcd.api.services.globalSettings.GetGlobalSettingsByKeyService;
-import posto.abcd.api.services.globalSettings.CreateGlobalSettingsService;
-import posto.abcd.api.services.globalSettings.ListAllGlobalSettings;
+import posto.abcd.api.dtos.globalSettings.SettingsUpdateDataRequest;
+import posto.abcd.api.services.globalSettings.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/global-settings")
@@ -25,17 +25,15 @@ public class GlobalSettingsController {
     private final GetGlobalSettingsByKeyService getGlobalSettingsByKeyService;
     private final GetGlobalSettingsByIdService getGlobalSettingsByIdService;
     private final ListAllGlobalSettings listAllGlobalSettings;
+    private final UpdateGlobalSettingsService updateGlobalSettingsService;
 
-    public  GlobalSettingsController(CreateGlobalSettingsService createGlobalSettingsService, GetGlobalSettingsByKeyService getGlobalSettingsByKeyService, GetGlobalSettingsByIdService getGlobalSettingsByIdService, ListAllGlobalSettings listAllGlobalSettings) {
+    public  GlobalSettingsController(CreateGlobalSettingsService createGlobalSettingsService, GetGlobalSettingsByKeyService getGlobalSettingsByKeyService, GetGlobalSettingsByIdService getGlobalSettingsByIdService, ListAllGlobalSettings listAllGlobalSettings, UpdateGlobalSettingsService updateGlobalSettingsService) {
         this.createGlobalSettingsService = createGlobalSettingsService;
         this.getGlobalSettingsByKeyService = getGlobalSettingsByKeyService;
         this.getGlobalSettingsByIdService = getGlobalSettingsByIdService;
         this.listAllGlobalSettings = listAllGlobalSettings;
+        this.updateGlobalSettingsService = updateGlobalSettingsService;
     }
-
-
-
-
 
 
     @PostMapping
@@ -47,9 +45,9 @@ public class GlobalSettingsController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<GlobalSettingsDataResponse>> getAllGlobalSettings(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable pagination) {
+    public ResponseEntity<List<GlobalSettingsDataResponse>> getAllGlobalSettings(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable pagination) {
         var globalSettingsList = listAllGlobalSettings.list(pagination);
-        return ResponseEntity.ok(globalSettingsList);
+        return ResponseEntity.ok(globalSettingsList.stream().toList());
     }
 
     @GetMapping("/key/{key}")
@@ -64,4 +62,10 @@ public class GlobalSettingsController {
         return ResponseEntity.ok(settings);
     }
 
+    @PutMapping()
+    public ResponseEntity<GlobalSettingsDataResponse> editGlobalSettingById(@RequestBody @Valid SettingsUpdateDataRequest settingsUpdateDataRequest) {
+        var settingEntity = getGlobalSettingsByIdService.getById(settingsUpdateDataRequest.id());
+        var settingUpdated =  updateGlobalSettingsService.update(settingsUpdateDataRequest);
+        return ResponseEntity.ok(new GlobalSettingsDataResponse(settingUpdated));
+    }
 }
