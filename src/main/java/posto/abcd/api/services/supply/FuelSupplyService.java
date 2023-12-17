@@ -65,7 +65,7 @@ public class FuelSupplyService {
 
         // pegando a configuração do combustível para identificar qual tipo de combustível e seu devido valor;
         var fuelSettings = getGlobalSettingsByKeyService.getByKey(supplyDataResquet.fuel_key());
-        var taxValue = getGlobalSettingsByKeyService.getByKey("tax_value");
+        var taxValue = getGlobalSettingsByKeyService.getByKey("tax-value");
 
         var pricePerLiter = new BigDecimal(fuelSettings.value());
         var liters = BigDecimal.valueOf(supplyDataResquet.liters().doubleValue());
