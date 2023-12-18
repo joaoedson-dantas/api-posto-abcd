@@ -30,3 +30,41 @@ aqui mesmo no Github, no Google Drive e no Figma.
 - [PostgreSQL](https://www.postgresql.org/): Sistema de gerenciamento de banco de dados relacional.
 - [Lombok](https://projectlombok.org/): Biblioteca Java que ajuda a reduzir a verbosidade do código.
 - Testes E2E: Testes de ponta a ponta garantindo a integridade do sistema.
+
+# Modo de Usar
+
+Siga estas instruções para configurar e executar o backend do projeto.
+
+### Pré-requisitos
+
+Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
+
+- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-downloads.html)
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Instalação
+
+1. Clone o repositório:
+
+```bash
+$ git clone https://github.com/joaoedson-dantas/api-posto-abcd.git
+```
+
+2. Instale as dependecias com o Maven
+
+## Modo de usar
+
+1. Inicie a aplicação com o Maven 
+2. A API poderá ser acessada http://localhost:8080
+
+## Docker
+
+Você pode executar este projeto com Docker executando o seguinte comando:
+
+```bash
+$ docker-compose up
+```
+Execute o comando e acesse em:  http:///localhost:5432/dbposto
+
+Entre com seu e-mail e senha configurada em: [Docker file](./docker-compose.yml).
