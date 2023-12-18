@@ -68,3 +68,33 @@ $ docker-compose up
 Execute o comando e acesse em:  http:///localhost:5432/dbposto
 
 Entre com seu e-mail e senha configurada em: [Docker file](./docker-compose.yml).
+
+## API Endpoints
+Esses são os principais Endpoints, poderá visualizar todos os endpois na documentação da api.
+
+```markdown
+GET /global-settings - Busca todas as configurações globais
+
+POST /global-settings - Cria uma configuração global
+
+PUT /global-settings - Edita uma configuração global
+
+POST /auth/user - Autenticar usuário através do token 
+
+POST /supply/to-fuel - Rota para abastecer veículos
+
+GET /supply/all-supplies - Buscar todos os abastecimentos
+
+GET /fuel-tanks - Busca todos os tanques criados
+
+POST /fill-tanks - Abastercer um tanque
+
+GET /fuel-pumps - Busca todas as bombas
+
+POST /fuel-pumps - Cadastra uma bomba
+
+
+```
+
+## Contato
+Algum problema ou sugestões? Envie uma mensagem para [joaoedson.dantas@outlook.com].
