@@ -15,6 +15,8 @@ import posto.abcd.api.services.fuelPump.CreateFuelPumpService;
 import posto.abcd.api.services.fuelPump.FindPumpByIdService;
 import posto.abcd.api.services.fuelPump.ListAllFuelPoumpsSerivce;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("fuel-pumps")
 @CrossOrigin(origins = "*")
@@ -38,8 +40,8 @@ public class FuelPumpController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<FuelPumpDataResponse>> listAllFuelPoumps(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable pagination) {
-        var pumpsList = listAllFuelPoumpsSerivce.list(pagination);
+    public ResponseEntity<List<FuelPumpDataResponse>> listAllFuelPoumps(Pageable pagination) {
+        var pumpsList = listAllFuelPoumpsSerivce.list(pagination).stream().toList();
         return ResponseEntity.ok(pumpsList);
     }
 

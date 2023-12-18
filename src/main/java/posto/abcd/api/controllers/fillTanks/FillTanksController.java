@@ -14,6 +14,8 @@ import posto.abcd.api.dtos.fillTank.FillTankDataResponse;
 import posto.abcd.api.services.fillTank.FillTankService;
 import posto.abcd.api.services.fillTank.ListTankFillingService;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("fill-tanks")
@@ -36,8 +38,8 @@ public class FillTanksController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<FillTankDataResponse>> listFillTanks(@PageableDefault(sort = {"date"}) Pageable pagination) {
-        var fillTanksList = listTankFillingService.list(pagination);
+    public ResponseEntity<List<FillTankDataResponse>> listFillTanks(Pageable pagination) {
+        var fillTanksList = listTankFillingService.list(pagination).stream().toList();
         return ResponseEntity.ok(fillTanksList);
     }
 

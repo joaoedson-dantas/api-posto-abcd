@@ -13,6 +13,8 @@ import posto.abcd.api.dtos.supply.SupplyDataResquet;
 import posto.abcd.api.services.supply.ListAllSuppliesService;
 import posto.abcd.api.services.supply.FuelSupplyService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("supply")
 @CrossOrigin(origins = "*")
@@ -33,9 +35,9 @@ public class SupplyController {
         return ResponseEntity.created(uri).body(new SupplyDataResponse(supplyEntity));
     }
 
-    @PostMapping("/all-supplies")
-    public ResponseEntity<Page<SupplyDataResponse>> findAll(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable pagination) {
-        var allSuppliesList = listallSuppliesService.list(pagination);
+    @GetMapping("/all-supplies")
+    public ResponseEntity<List<SupplyDataResponse>> findAll( ) {
+        var allSuppliesList = listallSuppliesService.list().stream().toList();
         return ResponseEntity.ok(allSuppliesList);
     }
 

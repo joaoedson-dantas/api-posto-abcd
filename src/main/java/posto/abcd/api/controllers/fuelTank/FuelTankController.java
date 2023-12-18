@@ -42,8 +42,8 @@ public class FuelTankController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FuelTankDataList>> listTanks(@PageableDefault(size = 10, page = 0, sort = {"id"}) Pageable paginacao) {
-        var tanksList = listFuelTankService.list(paginacao).stream().toList();
+    public ResponseEntity<List<FuelTankDataList>> listTanks() {
+        var tanksList = listFuelTankService.list().stream().toList();
         return ResponseEntity.ok(tanksList);
     }
 

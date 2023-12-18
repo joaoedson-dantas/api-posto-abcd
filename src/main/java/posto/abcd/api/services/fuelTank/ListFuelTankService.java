@@ -1,10 +1,12 @@
 package posto.abcd.api.services.fuelTank;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import posto.abcd.api.dtos.fuelTank.FuelTankDataList;
+import posto.abcd.api.dtos.fuelTank.FuelTankDataResponse;
 import posto.abcd.api.repository.fuelTank.FuelTankRepository;
+
+import java.util.List;
 
 @Service
 public class ListFuelTankService {
@@ -17,9 +19,9 @@ public class ListFuelTankService {
     }
 
 
-    public Page<FuelTankDataList> list(Pageable pagination) {
-        return fuelTankRepository.findAll(pagination)
-                .map(FuelTankDataList::new);
+    public List<FuelTankDataList> list() {
+        return fuelTankRepository.findAll()
+                .stream().map(FuelTankDataList::new).toList();
     }
 
 }
