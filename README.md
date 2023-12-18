@@ -30,8 +30,12 @@ aqui mesmo no Github, no Google Drive e no Figma.
 - [PostgreSQL](https://www.postgresql.org/): Sistema de gerenciamento de banco de dados relacional.
 - [Lombok](https://projectlombok.org/): Biblioteca Java que ajuda a reduzir a verbosidade do código.
 - Testes E2E: Testes de ponta a ponta garantindo a integridade do sistema.
+  
+## Estrutura do projeto 
+  ![estrutura](https://github.com/joaoedson-dantas/api-posto-abcd/assets/114243172/0b0a7f5d-caf1-4487-ac90-f1c4d73ff72f)
 
-# Modo de Usar
+
+# Vamos começar?
 
 Siga estas instruções para configurar e executar o backend do projeto.
 
