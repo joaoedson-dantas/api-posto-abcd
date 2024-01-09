@@ -102,4 +102,8 @@ POST /fuel-pumps - Cadastra uma bomba
 ```
 
 ## Contato
+<<<<<<< HEAD
 Algum problema ou sugestões? Envie uma mensagem para [joaoedson.dantas@outlook.com].
+=======
+Algum problema ou sugestões? Envie uma mensagem para [joaoedson.dantas@outlook.com].
+>>>>>>> efbfd73334f7e97e3ede7397abf9082ea80020a4
